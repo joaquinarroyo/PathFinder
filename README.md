@@ -1,5 +1,5 @@
 # PathFinder
-A graphic path finder with python
+A graphic path finder in python
 
 - You can draw walls with left-click and erase them with rigth-click
 - You can reset all the board or only the path
