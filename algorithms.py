@@ -106,7 +106,6 @@ def add_to_open(open, neighbor):
 # Dijkstra's path finding algorithm
 
 def dijkstras_search(board, start, end, screen, show_steps):
-
     # list of panted nodes
     painted = []
 
@@ -117,6 +116,7 @@ def dijkstras_search(board, start, end, screen, show_steps):
     # Create a start node
     start_node = Node(start, None)
 
+    # intialize not_visited list
     for i in range(int(SIZE[0]/SQUARE_L)):
         for j in range(int(SIZE[1]/SQUARE_L)):
             if (i, j) != start:
@@ -125,7 +125,7 @@ def dijkstras_search(board, start, end, screen, show_steps):
     # Add the start node to visited
     visited.append(start_node)
 
-    # Loop until the visited list is empty
+    # Loop until the not_visited list is empty or found the end
     while len(not_visited) > 0:
 
         # sort the list
@@ -147,6 +147,8 @@ def dijkstras_search(board, start, end, screen, show_steps):
 
         # take the current position
         x, y = current_node.position
+
+        # neighbors
         neighbors = [(x-1, y), (x+1, y), (x, y-1), (x, y+1)]
 
         for next in neighbors:
@@ -157,7 +159,7 @@ def dijkstras_search(board, start, end, screen, show_steps):
                 continue
 
             neighbor = Node(next, current_node)
-            neighbor.f = current_node.f + 1
+            neighbor.f = current_node.f + 1     # weigth
 
             # if one neighbor is in final coords break
             if board_value == FINAL:
@@ -165,7 +167,7 @@ def dijkstras_search(board, start, end, screen, show_steps):
                 visited.append(neighbor)
                 break
             
-            # if neighbor not in visited
+            # if neighbor in not_visited
             if neighbor.position in not_visited:
                 visited.append(neighbor)
                 not_visited.remove(neighbor.position)
