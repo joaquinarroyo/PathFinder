@@ -1,7 +1,6 @@
-import math, threading, time
+import math, threading
 from data import *
 from board import draw_square
-from tkinter import *
 
 # module -> Path finding algorithms
 
@@ -31,7 +30,6 @@ def astar_search(board, start, end, screen, show_steps):
 
     # Loop until the open list is empty
     while len(open) > 0:
-        sem.acquire()
 
         # sort the open list
         open.sort()
@@ -44,7 +42,6 @@ def astar_search(board, start, end, screen, show_steps):
 
         # if current_node == end_node, we return the path(reversed)
         if current_node == end_node:
-            sem.release()
             t1.join()
             t2.join()
             path = []
@@ -83,7 +80,6 @@ def astar_search(board, start, end, screen, show_steps):
                 # add neighbor to the open list
                 open.append(neighbor)
             
-        sem.release()
         if show_steps:
             t1 = threading.Thread(name="draw1", target=draw, args=(open, painted_open, screen, start, end, C_OPEN))
             t2 = threading.Thread(name="draw2", target=draw, args=(closed, painted_closed, screen, start, end, C_CLOSED))
