@@ -1,4 +1,4 @@
-import math, threading
+import math, threading, time
 from data import *
 from board import draw_square
 from tkinter import *
@@ -85,14 +85,12 @@ def astar_search(board, start, end, screen, show_steps):
             
         sem.release()
         if show_steps:
-            sem.acquire()
             t1 = threading.Thread(name="draw1", target=draw, args=(open, painted_open, screen, start, end, C_OPEN))
             t2 = threading.Thread(name="draw2", target=draw, args=(closed, painted_closed, screen, start, end, C_CLOSED))
             t1.start()
             t2.start()
             t1.join()
             t2.join()
-            sem.release()
     
     # if we dont find path, return []
     return []
@@ -113,17 +111,22 @@ def dijkstras_search(board, start, end, screen, show_steps):
     painted = []
 
     # list of visited nodes
+    not_visited = []
     visited = []
 
     # Create a start node
     start_node = Node(start, None)
 
+    for i in range(int(SIZE[0]/SQUARE_L)):
+        for j in range(int(SIZE[1]/SQUARE_L)):
+            if (i, j) != start:
+                not_visited.append((i, j))
+
     # Add the start node to visited
     visited.append(start_node)
 
     # Loop until the visited list is empty
-    while len(visited) > 0:
-        sem.acquire()
+    while len(not_visited) > 0:
 
         # sort the list
         visited.sort()
@@ -134,7 +137,6 @@ def dijkstras_search(board, start, end, screen, show_steps):
         # if current_node == end_node, we return the path(reversed)
         if board.get(current_node.position) == FINAL:
             path = []
-            sem.release()
             t1.join()
             while current_node != start_node:
                 x1, y1 = current_node.position
@@ -153,7 +155,7 @@ def dijkstras_search(board, start, end, screen, show_steps):
             # if it's a wall
             if board_value == WALL:
                 continue
-            
+
             neighbor = Node(next, current_node)
             neighbor.f = current_node.f + 1
 
@@ -164,18 +166,15 @@ def dijkstras_search(board, start, end, screen, show_steps):
                 break
             
             # if neighbor not in visited
-            if neighbor not in visited:
+            if neighbor.position in not_visited:
                 visited.append(neighbor)
-
-        sem.release()
+                not_visited.remove(neighbor.position)
 
         # if show steps is active
         if show_steps:
-            sem.acquire()
             t1 = threading.Thread(name="draw1", target=draw, args=(visited, painted, screen, start, end, C_CLOSED))
             t1.start()
             t1.join()
-            sem.release()
     
     # if we dont find path, return []
     return []
