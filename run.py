@@ -1,4 +1,4 @@
-import pygame, sys, time
+import pygame, sys
 from data import *
 from board import *
 from algorithms import *
@@ -11,23 +11,21 @@ L_FINAL = int(SIZE[0]/SQUARE_L) - 2, int(SIZE[1]/SQUARE_L) - 2
 
 # call the algorithm to find the path
 def findPath(algorithm, reseted, board, screen, init, final, show_steps):
+    # resets the board
+    if not reseted:
+            board = reset_path(SQUARE_L, SQUARE_L, board, screen, init, final)
+
+    # runs A* algorithm
     if algorithm == A_STAR:
-        if not reseted:
-            board = reset_path(SQUARE_L, SQUARE_L, board, screen, init, final)
         path = astar_search(board, init, final, screen, show_steps)
-        for (x, y) in path:
-            draw_square(x, y, screen, init, final, C_PATH)
-            time.sleep(0.01)
-        reseted = False
     
+    # runs dijsktra's algorithm
     elif algorithm == DIJKSTRAS:
-        if not reseted:
-            board = reset_path(SQUARE_L, SQUARE_L, board, screen, init, final)
         path = dijkstras_search(board, init, final, screen, show_steps)
-        for (x, y) in path:
-            draw_square(x, y, screen, init, final, C_PATH)
-            time.sleep(0.01)
-        reseted = False
+
+    reseted = False
+    # draw the path
+    draw_path(path, screen, init ,final)
     return reseted, board
 
 # run the program
@@ -70,6 +68,7 @@ def run():
     set_init = False
     set_end = False
     show_steps = True
+
     algo_index = 0
     algorithm = ALGORITHMS[algo_index]
 

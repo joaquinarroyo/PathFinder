@@ -1,4 +1,4 @@
-import pygame
+import pygame, time
 from data import *
 
 # module -> Path finding board
@@ -112,6 +112,12 @@ def draw_square(x, y, screen, init, final, color):
         pygame.draw.rect(screen, color, [x_10, y_10, SQUARE_L, SQUARE_L], 0)
         pygame.draw.rect(screen, BLACK, [x_10, y_10, SQUARE_L, SQUARE_L], 1)
         pygame.display.update()
+
+# draws the path
+def draw_path(path, screen, init, final):
+    for (x, y) in path:
+        draw_square(x, y, screen, init, final, C_PATH)
+        time.sleep(0.01)
 
 # resets the board
 def reset(height, width, board, screen, init, final):

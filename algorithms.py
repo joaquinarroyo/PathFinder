@@ -42,9 +42,10 @@ def astar_search(board, start, end, screen, show_steps):
 
         # if current_node == end_node, we return the path(reversed)
         if current_node == end_node:
-            t1.join()
-            t2.join()
             path = []
+            if show_steps:
+                t1.join()
+                t2.join()
             while current_node != start_node:
                 x1, y1 = current_node.position
                 path.append((x1, y1))
@@ -122,7 +123,7 @@ def dijkstras_search(board, start, end, screen, show_steps):
     visited.append(start_node)
 
     # Loop until the not_visited list is empty or found the end
-    while len(not_visited) > 0:
+    while len(not_visited) > 0 and len(visited) > 0:
 
         # sort the list
         visited.sort()
@@ -133,7 +134,8 @@ def dijkstras_search(board, start, end, screen, show_steps):
         # if current_node == end_node, we return the path(reversed)
         if board.get(current_node.position) == FINAL:
             path = []
-            t1.join()
+            if show_steps:
+                t1.join()
             while current_node != start_node:
                 x1, y1 = current_node.position
                 path.append((x1, y1))
