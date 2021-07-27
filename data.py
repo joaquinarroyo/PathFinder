@@ -4,8 +4,8 @@ from typing import Tuple
 # module -> Path finding data
 
 # Algorithms
-A_STAR = "A-star"        # A* algorithm
-DIJKSTRAS = "Dijsktra's"     # Dijkstra's algorithm
+A_STAR = "A-star"               # A* algorithm
+DIJKSTRAS = "Dijsktra's"        # Dijkstra's algorithm
 ALGORITHMS = [A_STAR, DIJKSTRAS]
 
 # Colors
@@ -33,7 +33,6 @@ SIZE = [800, 600]   # board size
 P_SIZE = [800, 690] # screen size
 SQUARE_L = 15       # cell side size
 
-
 # Limits coords
 L_INIT = 1, 1
 L_FINAL = int(SIZE[0]/SQUARE_L) - 2, int(SIZE[1]/SQUARE_L) - 2
@@ -55,8 +54,8 @@ class Node:
     # Instance for compare
     def __eq__(self, other):
         return self.position == other.position
-    # Instance for sort
 
+    # Instance for sort
     def __lt__(self, other):
          return self.f < other.f
 
