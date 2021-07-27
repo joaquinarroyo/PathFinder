@@ -166,7 +166,7 @@ def run():
                                 board = draw_wall(x, y, board, screen, init, final)
 
                 # Mouse rigthclick event
-                if pygame.mouse.get_pressed()[2]:
+                if pygame.mouse.get_pressed()[2] and reseted:
                     x, y = pygame.mouse.get_pos()
                     board = erase_wall(x, y, board, screen, init, final)
                 
