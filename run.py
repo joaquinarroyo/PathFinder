@@ -5,10 +5,6 @@ from algorithms import *
 
 # module -> Path finding main file
 
-# Limits coords
-L_INIT = 1, 1
-L_FINAL = int(SIZE[0]/SQUARE_L) - 2, int(SIZE[1]/SQUARE_L) - 2
-
 # call the algorithm to find the path
 def findPath(algorithm, reseted, board, screen, init, final, show_steps):
     # resets the board

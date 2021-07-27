@@ -33,6 +33,11 @@ SIZE = [800, 600]   # board size
 P_SIZE = [800, 690] # screen size
 SQUARE_L = 15       # cell side size
 
+
+# Limits coords
+L_INIT = 1, 1
+L_FINAL = int(SIZE[0]/SQUARE_L) - 2, int(SIZE[1]/SQUARE_L) - 2
+
 # Path
 PATH = os.path.dirname(os.path.realpath(__file__))
 
