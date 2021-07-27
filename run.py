@@ -109,7 +109,6 @@ def run():
                         show_running.text = ""
                         show_running.draw(screen, 18)
                         running = False
-                        draw = True
                     
                     # Reset all button
                     elif reset_all_button.isOver(pos):
