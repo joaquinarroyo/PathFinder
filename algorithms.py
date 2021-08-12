@@ -4,11 +4,6 @@ from board import draw_square
 
 # module -> Path finding algorithms
 
-painted_open = []
-painted_closed = []
-painted = []
-sem = threading.Semaphore(1)
-
 ############################## A #################################################
 # A* path finding algorithm
 def astar_search(board, start, end, screen, show_steps):
