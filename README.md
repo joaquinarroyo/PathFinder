@@ -7,7 +7,7 @@ A graphic path finder in python
 - You can change the algorithm
 - You can choose if you want to view the steps of the algorithm you've selected
 
-To run the program just run the run.py file. (You will also need to have all the other files)
+To run the program just run the run.py file.
 
 Available algorithms -> A* algorithm, Dijkstra's algorithm
 
