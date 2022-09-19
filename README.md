@@ -9,5 +9,3 @@ A graphic path finder in python
 
 To run the program just run the run.py file.
 
-Available algorithms -> A* algorithm, Dijkstra's algorithm
-
