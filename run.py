@@ -34,7 +34,7 @@ def run():
     final = L_FINAL
 
     # window image
-    windowImg = pygame.image.load(PATH + "\imgs\icon.jpg")
+    windowImg = pygame.image.load(PATH + "/imgs/icon.jpg")
 
     # init the screen
     screen = pygame.display.set_mode(P_SIZE)
@@ -84,7 +84,9 @@ def run():
         change_algo_button.draw(screen, 23, BLACK)
         show_algorithm.draw(screen, 27, BLACK)
 
-        for event in pygame.event.get():
+        if pygame.event.peek:
+            event = pygame.event.poll()
+        # for event in pygame.event.get():
             if not running:
                 # QUIT event
                 if event.type == pygame.QUIT:
@@ -94,7 +96,6 @@ def run():
                 # Mouse leftclick event
                 if pygame.mouse.get_pressed()[0]:
                     x, y = pygame.mouse.get_pos()
-
                     # Start button
                     if init_button.isOver(pos):
                         running = True
@@ -209,8 +210,8 @@ def run():
                             show_steps_button.color = C_INIT
                         else:
                             show_steps_button.color = C_BUTTON
-                    
-
+        pygame.event.wait()
+        pygame.event.clear()
         pygame.display.flip()
         clock.tick(60)
 
